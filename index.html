@@ -1,10 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Convite Personalizado</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convites Virtuais | Matheus e Thais</title>
+
+<style>
+  :root {
+    --verde-escuro: #262f19;
+    --verde-medio: #37411c;
+    --branco-quente: #f8f6eb;
+    --bege: #c5b68b;
+  }
+
+  body {
+    background: var(--branco-quente);
+    font-family: "Inter", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .pdf-generator-container {
+    background: var(--branco-quente);
+    width: 100%;
+    max-width: 480px;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    margin: 2rem;
+  }
+
+  .pdf-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .logo {
+    width: 110px;
+    height: auto;
+    background: var(--verde-escuro);
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .pdf-header h1 {
+    font-size: 1.6rem;
+    color: var(--verde-escuro);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .pdf-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.4rem;
+  }
+
+  .pdf-form label {
+    font-size: 0.92rem;
+    color: var(--verde-medio);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .pdf-form input {
+    padding: 12px 14px;
+    border: 1px solid var(--bege);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 1rem;
+    color: var(--verde-escuro);
+    transition: border 0.2s ease;
+  }
+
+  .pdf-form input:focus {
+    outline: none;
+    border: 1px solid var(--verde-medio);
+  }
+
+  .btn-gerar {
+    width: 100%;
+    padding: 14px;
+    background: var(--verde-escuro);
+    color: var(--branco-quente);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    margin-top: 0.5rem;
+  }
+
+  .btn-gerar:hover {
+    background: var(--verde-medio);
+  }
+
+  /* ===== POPUP ===== */
+
+  #popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  #popup.hidden {
+    display: none;
+  }
+
+  #popup .popup-content {
+    background: var(--branco-quente);
+    padding: 2rem;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 340px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+    border: 2px solid var(--bege);
+  }
+
+  #popup .popup-content h2 {
+    color: var(--verde-escuro);
+    margin-bottom: 0.5rem;
+  }
+
+  #popup .popup-content p {
+    color: var(--verde-medio);
+    font-size: 0.95rem;
+  }
+
+  #popup .popup-content button {
+    margin-top: 1rem;
+    padding: 10px 18px;
+    background: var(--verde-escuro);
+    color: var(--branco-quente);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  #popup .popup-content button:hover {
+    background: var(--verde-medio);
+  }
+</style>
+
 </head>
 <body>
-  <script src="convite.js"></script>
+
+<div class="pdf-generator-container">
+  
+  <header class="pdf-header">
+      <img src="assets/logomt.png" alt="Logo MT" class="logo">
+      <h1>Gerar Convite</h1>
+  </header>
+
+  <form id="pdfForm" class="pdf-form">
+      <div class="form-group">
+          <label for="nome">Nome (obrigatório)</label>
+          <input type="text" id="nome" placeholder="Ex: Gabriel" required>
+      </div>
+
+      <div class="form-group">
+          <label for="sobrenome">Sobrenome (opcional)</label>
+          <input type="text" id="sobrenome" placeholder="Ex: Barbosa">
+      </div>
+
+      <div class="form-group">
+          <label for="complemento">Complemento (opcional)</label>
+          <input type="text" id="complemento" placeholder="Ex: e família">
+      </div>
+
+      <button type="submit" class="btn-gerar">Gerar PDF</button>
+  </form>
+</div>
+
+<!-- POPUP DE CONFIRMAÇÃO -->
+<div id="popup" class="hidden">
+  <div class="popup-content">
+    <h2>Convite Gerado!</h2>
+    <p>O arquivo foi baixado com sucesso.</p>
+    <button id="popupClose">Fechar</button>
+  </div>
+</div>
+
+<script src="convite.js"></script>
+
 </body>
 </html>
